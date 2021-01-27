@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  ubuntu_dockerized:
+    container_name: ubuntu_dockerized
+    image: kilpio/ubuntu_dockerized
+    user: root
+    volumes:
+     - /var/run/docker.sock:/var/run/docker.sock
