@@ -1,7 +1,7 @@
 FROM ubuntu:focal
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recomends \
+    apt-get install -y --no-install-recommends \
     systemd systemd-sysv libsystemd0 ca-certificates iptables uproute 2 dbus kmod locales sudo udev \
     apt-transport-https ca-certificates curl gnupg-agent software-properties-common \
     mc net-tools jq zip locales-all && \
@@ -11,13 +11,13 @@ RUN apt-get update && \
     add-apt-repository \
         "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
         $(lsb_release -cs) \
-        stable" &&  \
+        stable" && \
     apt-get update && apt-get install --no-install-recommends -y \
         docker-ce docker-ce-cli containerd.io && \
     apt-get clean -y && \
     rm -rf \
         /var/cache/debconf/* \
-        /var/lib/apt/lists/*  \
+        /var/lib/apt/lists/* \
         /var/log/* \
         /tmp/* \
         /var/tmp/* \
