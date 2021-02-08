@@ -6,8 +6,11 @@ RUN apt-get update && \
     apt-transport-https ca-certificates curl gnupg-agent software-properties-common \
     mc net-tools jq zip locales-all && \
     echo "ReadKMsg=0" >> /etc/systemd/journald.conf && \
-    useradd --create-home --shell /bin/bash test && echo "test:test" | chpasswd && adduser test sudo \
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
+    useradd --create-home --shell /bin/bash test && echo "test:test" | chpasswd && adduser test sudo
+
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+
+RUN apt-key fingerprint 0EBFCD88 && \
     add-apt-repository \
         "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
         $(lsb_release -cs) \
