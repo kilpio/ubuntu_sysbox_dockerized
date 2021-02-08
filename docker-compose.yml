@@ -1,9 +1,9 @@
 version: "3.7"
 
 services:
-  ubuntu_dockerized:
+  ubuntu_sysbox_dockerized:
     container_name: ubuntu_sysbox_dockerized
-    image: kilpio/ubuntu_sysbox_dockerized
+    image: kilpio/ubuntu_sysbox_dockerized:latest
     user: root
     volumes:
      - /var/run/docker.sock:/var/run/docker.sock
