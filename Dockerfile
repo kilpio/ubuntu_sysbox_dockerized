@@ -2,7 +2,7 @@ FROM ubuntu:focal
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    systemd systemd-sysv libsystemd0 ca-certificates iptables uproute 2 dbus kmod locales sudo udev \
+    systemd systemd-sysv libsystemd0 ca-certificates iptables iproute2 dbus kmod locales sudo udev \
     apt-transport-https ca-certificates curl gnupg-agent software-properties-common \
     mc net-tools jq zip locales-all && \
     echo "ReadKMsg=0" >> /etc/systemd/journald.conf && \
