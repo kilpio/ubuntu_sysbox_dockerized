@@ -29,6 +29,10 @@ RUN apt-key fingerprint 0EBFCD88 && \
         /usr/share/local/* && \
     usermod -a -G docker test 
 
+RUN curl -L "https://github.com/docker/compose/releases/download/1.28.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
+    chmod +x /usr/local/bin/docker-compose && \
+    ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+
 RUN apt-get update && apt-get install --no-install-recommends -y \
             openssh-server &&  \
     mkdir /home/test/.ssh && \
