@@ -1,8 +1,8 @@
 FROM ubuntu:focal
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    systemd systemd-sysv libsystemd0 ca-certificates iptables iproute2 dbus kmod locales sudo udev \
+RUN apt-get update && DEBIAN_FRONTEND="noninteractive" TZ="Europe/Moscow" apt-get install -y tzdata 
+RUN apt-get install -y  \
+    apt-utils systemd systemd-sysv libsystemd0 ca-certificates iptables iproute2 dbus kmod locales sudo udev \
     apt-transport-https ca-certificates curl gnupg-agent software-properties-common \
     git mc net-tools jq zip locales-all && \
     echo "ReadKMsg=0" >> /etc/systemd/journald.conf && \
@@ -43,3 +43,6 @@ EXPOSE 22
 STOPSIGNAL SIGRTMIN+3
 
 ENTRYPOINT [ "/sbin/init", "--log-level=err" ]
+
+USER test
+RUN mkdir /home/test/tmp && echo "export TMPDIR=\$HOME/tmp" >> /home/test/.bashrc 
