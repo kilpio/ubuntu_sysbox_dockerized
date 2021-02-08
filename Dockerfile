@@ -4,7 +4,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     systemd systemd-sysv libsystemd0 ca-certificates iptables iproute2 dbus kmod locales sudo udev \
     apt-transport-https ca-certificates curl gnupg-agent software-properties-common \
-    mc net-tools jq zip locales-all && \
+    git mc net-tools jq zip locales-all && \
     echo "ReadKMsg=0" >> /etc/systemd/journald.conf && \
     useradd --create-home --shell /bin/bash test && echo "test:test" | chpasswd && adduser test sudo
 
