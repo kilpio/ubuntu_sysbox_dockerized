@@ -5,5 +5,6 @@ services:
     container_name: ubuntu_sysbox_dockerized
     image: kilpio/ubuntu_sysbox_dockerized:latest
     user: root
+    runtime: sysbox-runc
     volumes:
-     - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock
