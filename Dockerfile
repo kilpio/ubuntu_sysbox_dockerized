@@ -1,10 +1,11 @@
 FROM ubuntu:focal
 
-RUN apt-get update && DEBIAN_FRONTEND="noninteractive" TZ="Europe/Moscow" apt-get install -y tzdata 
-RUN apt-get install -y  \
-    apt-utils systemd systemd-sysv libsystemd0 ca-certificates iptables iproute2 dbus kmod locales sudo udev \
+RUN apt-get update && DEBIAN_FRONTEND="noninteractive" TZ="Europe/Moscow" apt-get install tzdata -y --no-install-recommends && \
+    apt-get install git -y --no-install-recommends && \
+    apt-get install -y --no-install-recommends \
+    systemd systemd-sysv libsystemd0 ca-certificates iptables iproute2 dbus kmod locales sudo udev \
     apt-transport-https ca-certificates curl gnupg-agent software-properties-common \
-    git mc net-tools jq zip locales-all && \
+    mc net-tools iputils-ping jq zip locales-all && \
     echo "ReadKMsg=0" >> /etc/systemd/journald.conf && \
     useradd --create-home --shell /bin/bash test && echo "test:test" | chpasswd && adduser test sudo
 
@@ -37,6 +38,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
             openssh-server &&  \
     mkdir /home/test/.ssh && \
     chown test:test /home/test/.ssh
+RUN mkdir /home/test/tmp && echo "export TMPDIR=\$HOME/tmp" >> /home/test/.bashrc && chown test:test /home/test/tmp
 
 EXPOSE 22
 
@@ -44,5 +46,3 @@ STOPSIGNAL SIGRTMIN+3
 
 ENTRYPOINT [ "/sbin/init", "--log-level=err" ]
 
-USER test
-RUN mkdir /home/test/tmp && echo "export TMPDIR=\$HOME/tmp" >> /home/test/.bashrc 
